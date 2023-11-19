@@ -1,0 +1,4 @@
+- pip lisdt or conda list depend which package managment you use
+- conda show numpy
+- conda uninstall numpy
+- conda install numpy
