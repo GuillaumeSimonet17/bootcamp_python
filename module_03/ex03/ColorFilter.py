@@ -100,7 +100,6 @@ class ColorFilter:
         -------
             This function should not raise any Exception.
         """
-        cel_array = array.copy()
         
 
 
