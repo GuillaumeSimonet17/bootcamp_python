@@ -1,0 +1,18 @@
+y^ => valeur predite ou etimee. prediction (or estimation) of the real value of y: parameters a and b and the input value x
+linear equation: y^ = ax+b.
+In Ml we don't use letter. but => yˆ = θ0 + θ1x
+θ => fréquemment utilisé pour représenter des paramètres inconnus dans un modèle, notamment dans le contexte de l'estimation des paramètres.
+
+Hypothesis:
+this linear equation is our hypothesis.
+So we need to find the right values for our parameters θ0 and θ1
+
+Prediction:
+Let’s consider a dataset containing m data points.
+yˆ(i) = θ0 + θ1x(i)
+for i = 1, ..., m
+yˆ(i) is the ith component of vector y
+x(i) is the ith component of vector x
+Given θ = [33 5] and x = [1 3]
+y^ = hθ(x) = [33 + 5 x 1      33 + 5 x 3] = [38 48]
+can be read as "the result of our hypothesis h given x and theta".
