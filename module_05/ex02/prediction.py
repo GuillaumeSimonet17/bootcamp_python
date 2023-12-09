@@ -15,14 +15,15 @@ def predict_(x, theta):
     m = len(x)
     X = []
 
-    for i in x:
+    for index, i in enumerate(x):
         y_hat = np.array(1)
-        y_hat = theta[0] + theta[1] * x[i-1]
+        y_hat = theta[0] + theta[1] * x[index]
         X.append(y_hat)
     X = np.array(X)
 
     return X
 
+# chatGPT function:
 def predict_x(x, theta):
     """
     Computes the vector of prediction y_hat from two non-empty numpy.array.
@@ -38,20 +39,17 @@ def predict_x(x, theta):
         No
     """
     ones = np.ones_like(x)
-    print('ones: ', ones)
     X0 = np.column_stack((ones, x))
-    print('XO: ', X0)
     y_hat = np.dot(X0, theta)
-
     return y_hat
 
 
 import numpy as np
-x = np.arange(1,6)
+x = np.arange(1,10)
 # Example 1:
 theta1 = np.array([[5], [0]])
-print(predict_(x, theta1))
-print(predict_x(x, theta1))
+# print(predict_(x, theta1))
+(predict_x(x, theta1))
 # # Ouput:
 # array([[5.], [5.], [5.], [5.], [5.]])
 # Do you remember why y_hat contains only 5’s here?

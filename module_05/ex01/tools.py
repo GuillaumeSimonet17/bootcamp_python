@@ -13,9 +13,9 @@ def add_intercept(X):
     """
     if not X.size > 0 or not isinstance(X, np.ndarray):
         return None
-    O = np.ones((X.shape[0], 1))
-    C = np.c_[(O, X)] # concat
+    O = np.ones_like(X) 
+    C = np.column_stack((O, X)) # concat
     return C
 
-X = np.array([])
+X = np.array([1, 2, 3, 4])
 print(add_intercept(X))
