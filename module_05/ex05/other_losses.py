@@ -14,7 +14,7 @@ def mse_(y, y_hat):
     """
     m = 1/(y.size)
     dist = (y_hat - y)**2
-    return np.sum(m * dist)
+    return m * np.sum(dist)
 
 # RMSE: square root of MSE
 def rmse_(y, y_hat):
@@ -32,7 +32,7 @@ def rmse_(y, y_hat):
     """
     m = 1/(y.size)
     dist = (y_hat - y)**2
-    return np.sqrt(np.sum(m * dist))
+    return np.sqrt(m * np.sum(dist))
 
 # MAE: Mean absolute error
 def mae_(y, y_hat):
@@ -50,7 +50,7 @@ def mae_(y, y_hat):
     """
     m = 1/(y.size)
     dist = abs(y_hat - y)
-    return np.sum(m * dist)
+    return m * np.sum(dist)
 
 def r2score_(y, y_hat):
     """
@@ -80,5 +80,5 @@ x = np.array([0, 15, -9, 7, 12, 3, -21])
 y = np.array([2, 14, -13, 5, 12, 4, -19])
 # Mean squared error
 ## your implementation
-print(r2score_(x,y))
+print(rmse_(x,y))
 ## Output:
