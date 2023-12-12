@@ -13,8 +13,11 @@ class Matrix:
     def __str__(self):
         return (f"{self.data}")
 
-    # def T(self):
-    #     return self.data.T
+    def T(self):
+        res = []
+        for col in zip(*self.data):
+            res.append(col)
+        return Matrix(res)
     
     def __add__(self, other): # add : only matrices of same dimensions.
         if not isinstance(other, Matrix):
@@ -33,12 +36,16 @@ class Matrix:
         return Matrix(res.tolist())
 
     def __mul__(self, other): # returns a Vector if we perform Matrix * Vector mutliplication.
-        print(type(other))
         if isinstance(other, (int, float)):
             res = other * self.data
             return Matrix(res.tolist())
-        # if isinstance(other, Vector):
-            # ???
+        if isinstance(other, Vector):
+            if self.data.shape[1] == other.shape[0]:
+                res = np.zeros((self.data.shape[0], other.shape[1]))
+                for i in range(res.size):
+                    for k in range(other.data.size):
+                        res[i] += self.data[i][k]*other.data[k]
+            return Vector(res.tolist())
         if isinstance(other, Matrix):
             if self.shape == other.shape: # Produit terme à terme (de Hadamard)
                 res = other.data * self.data
@@ -48,27 +55,27 @@ class Matrix:
                 if (other.shape[0] == 1):
                     return Vector(result)
                 return Matrix(result)
-        
 
     def __truediv__(self, other): # div : only scalars.
         if isinstance(other, (int,float)):
             if other == 0:
                 raise ZeroDivisionError("Division by zero is not allowed.")
             return Matrix((self.data / other).tolist())
-        
-#     def __rtruediv__(self, other): # div : only scalars.
-#         self.__truediv__(other)
-        
 
 class Vector(Matrix):
 
     def __init__(self, data):
-        super().__init__(data) # init de data
-        if self.shape[0] != 1 and self.shape[1] != 1:
-            raise ValueError("Invalid input for vector initialization")
+        super().__init__(data)
+        # if self.data.shape[0] != 1 and self.data.shape[1] != 1:
+            # raise ValueError("Invalid input for vector initialization")
 
-    # def dot(self, other):
-    #     if self.shape != other.shape:
-    #         raise ValueError("Incompatible shapes for dot product")
-    #     res = np.inner(self.values.flatten(), other.values.flatten()) # inner: produit scalair de deux vecteurs unidimensionnels. flatten: "applatit" au cas ou c'est des matrices 
-    #     return res
+    def __str__(self):
+        return (f"{self.data}")
+
+    def dot(self, other):
+        if self.shape[1] != other.shape[0]:
+            raise ValueError("Incompatible shapes for dot product")
+        res = np.inner(self.data.flatten(), other.data.flatten()) # inner: produit scalair de deux vecteurs unidimensionnels. flatten: "applatit" au cas ou c'est des matrices 
+        if isinstance(res, (np.int64, np.float64)):
+            r = [[res]]
+            return Vector(r)
