@@ -1,6 +1,6 @@
 import numpy as np
 
-# ∇(J) = 1/m X'T(X'0 θ − y)
+# ∇(J) = 1/m X'T(X'θ − y)
 # ∇(J) Vetcor 2
 # X' MAtrix (m*2)
 # X'T transpose of X' (2*m)
@@ -41,19 +41,25 @@ def simple_gradient(x, y, theta):
     m = x.size
     Xp = np.column_stack((np.ones_like(x), x))
     XpT = Xp.T
-    print(XpT)
-    # multiplier Xpt avec le resultat du produit de (Xp * theta - y)
+    # print(theta)
+    # print(Xp.shape)
+    rr = [sum(i * theta) for i in Xp]   # Xp * theta
+    rr = np.array(rr)
+    # print(y.shape)
+    # print(rr.shape)
+    sub = [sum(i - y) for i in rr]      # rr - y
 
-    
+    # multiplier Xpt avec le resultat du produit de (Xp * theta) - y
+
+
 
 
 x = np.array([12.4956442, 21.5007972, 31.5527382, 48.9145838]).reshape((-1, 1))
 y = np.array([37.4013816, 36.1473236, 45.7655287, 46.6793434]).reshape((-1, 1))
-
 # Example 0:
 theta1 = np.array([[2], [0.7]])
 # print(theta1)
-simple_gradient(x, y, theta1)
+print(simple_gradient(x, y, theta1))
 # Output:
 # array([[-19.0342...], [-586.6687...]])
 
